@@ -16,8 +16,8 @@ function Destinos() {
   return (
     <div className="w-4/5 mx-auto my-16">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-[#6b5b51] mb-4">Destinos</h1>
-        <p className="text-lg text-stone-700">Descubre la riqueza cultural de la Isla</p>
+        <h1 className="text-4xl font-bold text-amber-800 mb-4">Destinos</h1>
+        <p className="text-lg text-amber-600">Descubre la riqueza cultural de la Isla</p>
       </div>
 
       <FilterSection />

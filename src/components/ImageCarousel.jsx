@@ -32,10 +32,10 @@ function ImageCarousel({ images }) {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto my-12">
-      <div className="overflow-hidden relative aspect-video rounded-xl shadow-2xl bg-gray-100">
+      <div className="overflow-hidden relative aspect-video rounded-xl shadow-2xl bg-stone-100">
         {loading ? (
           <div className="flex items-center justify-center h-full">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6b5b51]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-800"></div>
           </div>
         ) : (
           images.map((image, index) => (
@@ -69,8 +69,8 @@ function ImageCarousel({ images }) {
             onClick={() => setCurrentIndex(index)}
             className={`w-8 h-8 rounded-full transition-all duration-300 flex items-center justify-center text-sm font-medium ${
               index === currentIndex 
-                ? 'bg-white text-[#6b5b51] scale-110' 
-                : 'bg-[#6b5b51] text-white hover:bg-[#8b7b71]'
+                ? 'bg-white text-amber-800 scale-110' 
+                : 'bg-amber-700 text-white hover:bg-amber-800'
             }`}
             aria-label={`Ir a imagen ${index + 1}`}
           >
