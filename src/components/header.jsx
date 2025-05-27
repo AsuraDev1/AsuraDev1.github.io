@@ -4,9 +4,14 @@ import AuthForm from './AuthForm.jsx';
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   useEffect(() => {
@@ -28,7 +33,18 @@ function Header() {
         <div className="text-2xl font-bold tracking-wider hover:text-stone-200 transition-all duration-300 cursor-pointer">
           RumbaCuba
         </div>
-        <nav>
+
+        {/* Botón de menú para móvil */}
+        <button 
+          className="md:hidden text-white p-2"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? '✕' : '☰'}
+        </button>
+
+        {/* Navegación para desktop */}
+        <nav className="hidden md:block">
           <ul className="flex items-center space-x-8">
             <li>
               <Link to="/" className="text-white hover:text-stone-200 transition-all duration-300 relative group">
@@ -71,6 +87,50 @@ function Header() {
             </li>
           </ul>
         </nav>
+
+        {/* Menú móvil */}
+        {isMenuOpen && (
+          <nav className="absolute top-full left-0 right-0 bg-amber-800 border-b border-amber-700 md:hidden">
+            <ul className="flex flex-col p-4 space-y-4">
+              <li>
+                <Link to="/" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                  Inicio
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                  Idioma
+                </a>
+              </li>
+              <li>
+                <Link to="/destinos" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                  Destinos
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                  Itinerarios
+                </a>
+              </li>
+              <li>
+                <button 
+                  className="w-full bg-white text-amber-800 px-4 py-2 rounded-md font-medium hover:bg-stone-200 transition-all duration-300"
+                  onClick={() => {
+                    toggleModal();
+                    toggleMenu();
+                  }}
+                >
+                  Sign Up
+                </button>
+              </li>
+            </ul>
+          </nav>
+        )}
       </div>
 
       {isModalOpen && (

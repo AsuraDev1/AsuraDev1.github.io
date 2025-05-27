@@ -26,16 +26,16 @@ function UniqueExperiencesSection() {
   ];
 
   return (
-    <section className="w-4/5 mx-auto my-16">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-amber-800 mb-4">Experiencias Únicas</h2>
-        <p className="text-lg text-amber-600">Vive momentos inolvidables en Cuba con nuestras experiencias seleccionadas</p>
+    <section className="w-11/12 sm:w-4/5 mx-auto my-8 sm:my-16">
+      <div className="text-center mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-4xl font-bold text-amber-800 mb-2 sm:mb-4">Experiencias Únicas</h2>
+        <p className="text-base sm:text-lg text-amber-600">Vive momentos inolvidables en Cuba con nuestras experiencias seleccionadas</p>
       </div>
 
-      <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-6 sm:gap-12">
         {experiences.map((experience, index) => (
-          <div key={index} className={`flex flex-col md:flex-row bg-stone-200 rounded-lg shadow-md overflow-hidden h-72 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-            <div className="w-full md:w-1/2 h-48 md:h-auto bg-gray-300 flex items-center justify-center text-amber-600 text-sm">
+          <div key={index} className={`flex flex-col md:flex-row bg-stone-200 rounded-lg shadow-md overflow-hidden ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+            <div className="w-full md:w-1/2 h-48 sm:h-64 md:h-auto bg-gray-300 flex items-center justify-center text-amber-600 text-sm">
               {experience.imageUrl ? (
                 <img
                   src={experience.imageUrl}
@@ -46,10 +46,10 @@ function UniqueExperiencesSection() {
                 <div className="text-amber-600 text-sm">{experience.imagePlaceholder}</div>
               )}
             </div>
-            <div className="w-full md:w-1/2 p-6 flex flex-col justify-center">
-              <h3 className="text-xl font-semibold text-amber-800 mb-3">{experience.title}</h3>
-              <p className="text-amber-600 text-sm mb-4">{experience.description}</p>
-              <button className="bg-amber-700 text-white px-6 py-2 rounded-md hover:bg-amber-800 transition-colors">
+            <div className="w-full md:w-1/2 p-4 sm:p-6 flex flex-col justify-center">
+              <h3 className="text-lg sm:text-xl font-semibold text-amber-800 mb-2 sm:mb-3">{experience.title}</h3>
+              <p className="text-sm sm:text-base text-amber-600 mb-4">{experience.description}</p>
+              <button className="bg-amber-700 text-white px-4 sm:px-6 py-2 rounded-md hover:bg-amber-800 transition-colors text-sm sm:text-base">
                 {experience.buttonText}
               </button>
             </div>

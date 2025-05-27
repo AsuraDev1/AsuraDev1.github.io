@@ -35,19 +35,19 @@ function AuthForm() {
   };
 
   return (
-    <div className="min-w-[320px] w-full max-w-sm mx-auto p-6 font-sans bg-stone-200 rounded-lg shadow-sm">
-      <h2 className="text-center text-2xl font-bold text-amber-800 mb-2">Bienvenido</h2>
-      <p className="text-center text-amber-600 mb-6 text-sm">Inicia sesión o crea una nueva cuenta</p>
-      <div className="flex justify-center mb-6">
+    <div className="min-w-[280px] w-full max-w-sm mx-auto p-4 sm:p-6 font-sans bg-stone-200 rounded-lg shadow-sm">
+      <h2 className="text-center text-xl sm:text-2xl font-bold text-amber-800 mb-2">Bienvenido</h2>
+      <p className="text-center text-amber-600 mb-4 sm:mb-6 text-sm">Inicia sesión o crea una nueva cuenta</p>
+      <div className="flex justify-center mb-4 sm:mb-6">
         <button 
-          className={`px-4 py-2 border-none bg-amber-700 text-white cursor-pointer text-base transition-all duration-300 mr-4 rounded-md ${isLogin ? 'font-bold' : 'opacity-80'}`}
+          className={`px-3 sm:px-4 py-2 border-none bg-amber-700 text-white cursor-pointer text-sm sm:text-base transition-all duration-300 mr-2 sm:mr-4 rounded-md ${isLogin ? 'font-bold' : 'opacity-80'}`}
           onClick={() => handleTabChange('login')}
           disabled={isLogin}
         >
           Iniciar Sesión
         </button>
         <button 
-          className={`px-4 py-2 border-none bg-amber-700 text-white cursor-pointer text-base transition-all duration-300 rounded-md ${!isLogin ? 'font-bold' : 'opacity-80'}`}
+          className={`px-3 sm:px-4 py-2 border-none bg-amber-700 text-white cursor-pointer text-sm sm:text-base transition-all duration-300 rounded-md ${!isLogin ? 'font-bold' : 'opacity-80'}`}
           onClick={() => handleTabChange('register')}
           disabled={!isLogin}
         >
@@ -55,11 +55,11 @@ function AuthForm() {
         </button>
       </div>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
         <div className="relative">
           {/* Formulario de Registro */}
           <div className={`w-full transition-all duration-300 ease-out ${!isLogin ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none absolute'}`}>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div className="form-group">
                 <label className="block text-amber-600 text-sm mb-1">Nombre Completo</label>
                 <input
@@ -67,7 +67,7 @@ function AuthForm() {
                   placeholder="Tu nombre completo"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <div className="form-group">
@@ -77,7 +77,7 @@ function AuthForm() {
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <div className="form-group">
@@ -88,7 +88,7 @@ function AuthForm() {
                     placeholder="********"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
+                    className="w-full px-3 py-2 text-sm sm:text-base border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                   />
                   <div 
                     onClick={togglePasswordVisibility}
@@ -106,7 +106,7 @@ function AuthForm() {
                     placeholder="********"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
+                    className="w-full px-3 py-2 text-sm sm:text-base border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                   />
                   <div 
                     onClick={toggleConfirmPasswordVisibility}
@@ -123,7 +123,7 @@ function AuthForm() {
                   placeholder="Selecciona tu país"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <div className="form-group">
@@ -133,16 +133,16 @@ function AuthForm() {
                   placeholder="Tu edad"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
-              <button type="submit" className="w-full bg-amber-700 text-white py-2 rounded-md mt-4 hover:bg-amber-800 transition-colors duration-300">Crear Cuenta</button>
+              <button type="submit" className="w-full bg-amber-700 text-white py-2 text-sm sm:text-base rounded-md mt-4 hover:bg-amber-800 transition-colors duration-300">Crear Cuenta</button>
             </div>
           </div>
 
           {/* Formulario de Inicio de Sesión */}
           <div className={`w-full transition-all duration-300 ease-out ${isLogin ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none absolute'}`}>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div className="form-group">
                 <label className="block text-amber-600 text-sm mb-1">Correo Electrónico</label>
                 <input
@@ -150,7 +150,7 @@ function AuthForm() {
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <div className="form-group">
@@ -161,7 +161,7 @@ function AuthForm() {
                     placeholder="********"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
+                    className="w-full px-3 py-2 text-sm sm:text-base border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                   />
                   <div 
                     onClick={togglePasswordVisibility}
@@ -171,7 +171,7 @@ function AuthForm() {
                   </div>
                 </div>
               </div>
-              <button type="submit" className="w-full bg-amber-700 text-white py-2 rounded-md mt-4 hover:bg-amber-800 transition-colors duration-300">Iniciar Sesión</button>
+              <button type="submit" className="w-full bg-amber-700 text-white py-2 text-sm sm:text-base rounded-md mt-4 hover:bg-amber-800 transition-colors duration-300">Iniciar Sesión</button>
             </div>
           </div>
         </div>
