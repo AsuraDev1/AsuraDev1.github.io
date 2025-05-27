@@ -72,10 +72,10 @@ function Header() {
               </a>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-stone-200 transition-all duration-300 relative group text-sm lg:text-base">
+              <Link to="/itinerario" className="text-white hover:text-stone-200 transition-all duration-300 relative group text-sm lg:text-base">
                 Itinerarios
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-stone-200 transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
             </li>
             <li>
               <button 
@@ -93,29 +93,29 @@ function Header() {
           <nav className="absolute top-full left-0 right-0 bg-amber-800 border-b border-amber-700 md:hidden">
             <ul className="flex flex-col p-4 space-y-4">
               <li>
-                <Link to="/" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
+                <Link to="/" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2" onClick={toggleMenu}>
                   Inicio
                 </Link>
               </li>
               <li>
-                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
+                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2" onClick={toggleMenu}>
                   Idioma
                 </a>
               </li>
               <li>
-                <Link to="/destinos" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
+                <Link to="/destinos" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2" onClick={toggleMenu}>
                   Destinos
                 </Link>
               </li>
               <li>
-                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
+                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2" onClick={toggleMenu}>
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
+                <Link to="/itinerario" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2" onClick={toggleMenu}>
                   Itinerarios
-                </a>
+                </Link>
               </li>
               <li>
                 <button 

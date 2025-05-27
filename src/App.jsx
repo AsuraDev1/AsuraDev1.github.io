@@ -11,6 +11,8 @@ import Footer from './components/Footer'
 import { Routes, Route } from 'react-router-dom'
 import Destinos from './components/Destinos/Destinos'
 import DetallesDestino from './pages/DetallesDestino'
+import Itinerario from './pages/Itinerario'
+import { destinos as allDestinos } from './components/Destinos/Destinos'
 
 function App() {
   const scrollToDestinos = (e) => {
@@ -70,8 +72,32 @@ function App() {
     }
   ];
 
+  const [itinerarioDestinos, setItinerarioDestinos] = useState([
+     { ...allDestinos[0], date: '06/06/2024', duration: 'Día completo', description: 'Corazón histórico de Cuba con arquitectura colonial' },
+     { ...allDestinos[1], date: '07/06/2024', duration: 'Medio día', description: 'Paisaje único con mogotes y plantaciones de tabaco' },
+  ]);
+
+  const handleAddDestination = (destino) => {
+    const nuevoDestinoItinerario = {
+      ...destino,
+      date: 'Seleccionar fecha',
+      duration: 'Seleccionar duración',
+      description: destino.description || 'Descripción no disponible',
+    };
+    if (!itinerarioDestinos.some(item => item.id === nuevoDestinoItinerario.id)) {
+        console.log('Añadiendo destino al itinerario:', nuevoDestinoItinerario);
+        setItinerarioDestinos([...itinerarioDestinos, nuevoDestinoItinerario]);
+    } else {
+      console.log('El destino ya está en el itinerario:', nuevoDestinoItinerario.name);
+    }
+  };
+
+  const handleRemoveDestination = (destinoId) => {
+    setItinerarioDestinos(itinerarioDestinos.filter(destino => destino.id !== destinoId));
+  };
+
   return (
-    <div className="font-playfair pt-28">
+    <div className="font-playfair pt-20">
       <Header />
 
       <Routes>
@@ -118,7 +144,15 @@ function App() {
             <UniqueExperiencesSection />
           </>
         } />
-        <Route path="/destinos" element={<Destinos />} />
+        <Route path="/destinos" element={<Destinos onAddDestination={handleAddDestination} />} />
+        <Route 
+          path="/itinerario" 
+          element={<Itinerario 
+                      itinerarioDestinos={itinerarioDestinos} 
+                      onRemoveDestination={handleRemoveDestination} 
+                      onAddDestination={handleAddDestination}
+                    />} 
+        />
         <Route path="/destinos/:id" element={<DetallesDestino />} />
       </Routes>
 
