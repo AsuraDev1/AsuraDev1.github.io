@@ -23,10 +23,10 @@ function Header() {
   }, [isModalOpen]); // Dependencia en isModalOpen
 
   return (
-    <header className="bg-amber-800 text-white p-4 border-b border-amber-700 shadow-lg">
+    <header className="fixed top-0 left-0 right-0 bg-amber-800 text-white p-4 border-b border-amber-700 shadow-lg z-50">
       <div className="w-4/5 mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold tracking-wider hover:text-stone-200 transition-all duration-300 cursor-pointer">
-          CubaTravel
+          RumbaCuba
         </div>
         <nav>
           <ul className="flex items-center space-x-8">

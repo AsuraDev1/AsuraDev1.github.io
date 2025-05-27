@@ -8,6 +8,8 @@ function AuthForm() {
   const [fullName, setFullName] = useState('');
   const [country, setCountry] = useState('');
   const [age, setAge] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleTabChange = (tab) => {
     setIsLogin(tab === 'login');
@@ -24,20 +26,28 @@ function AuthForm() {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
     <div className="min-w-[320px] w-full max-w-sm mx-auto p-6 font-sans bg-stone-200 rounded-lg shadow-sm">
       <h2 className="text-center text-2xl font-bold text-amber-800 mb-2">Bienvenido</h2>
       <p className="text-center text-amber-600 mb-6 text-sm">Inicia sesión o crea una nueva cuenta</p>
       <div className="flex justify-center mb-6">
         <button 
-          className={`px-4 py-2 border-none bg-transparent cursor-pointer text-base transition-all duration-300 mr-4 ${isLogin ? 'border-b-2 border-amber-800 font-bold' : 'border-b-2 border-transparent'}`}
+          className={`px-4 py-2 border-none bg-amber-700 text-white cursor-pointer text-base transition-all duration-300 mr-4 rounded-md ${isLogin ? 'font-bold' : 'opacity-80'}`}
           onClick={() => handleTabChange('login')}
           disabled={isLogin}
         >
           Iniciar Sesión
         </button>
         <button 
-          className={`px-4 py-2 border-none bg-transparent cursor-pointer text-base transition-all duration-300 ${!isLogin ? 'border-b-2 border-amber-800 font-bold' : 'border-b-2 border-transparent'}`}
+          className={`px-4 py-2 border-none bg-amber-700 text-white cursor-pointer text-base transition-all duration-300 rounded-md ${!isLogin ? 'font-bold' : 'opacity-80'}`}
           onClick={() => handleTabChange('register')}
           disabled={!isLogin}
         >
@@ -57,7 +67,7 @@ function AuthForm() {
                   placeholder="Tu nombre completo"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700"
+                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <div className="form-group">
@@ -67,20 +77,23 @@ function AuthForm() {
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700"
+                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <div className="form-group">
                 <label className="block text-amber-600 text-sm mb-1">Contraseña</label>
                 <div className="relative">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="********"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700"
+                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                   />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                  <div 
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
+                  >
                     👁️
                   </div>
                 </div>
@@ -89,13 +102,16 @@ function AuthForm() {
                 <label className="block text-amber-600 text-sm mb-1">Confirmar Contraseña</label>
                 <div className="relative">
                   <input
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     placeholder="********"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700"
+                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                   />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                  <div 
+                    onClick={toggleConfirmPasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
+                  >
                     👁️
                   </div>
                 </div>
@@ -107,7 +123,7 @@ function AuthForm() {
                   placeholder="Selecciona tu país"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700"
+                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <div className="form-group">
@@ -117,7 +133,7 @@ function AuthForm() {
                   placeholder="Tu edad"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700"
+                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <button type="submit" className="w-full bg-amber-700 text-white py-2 rounded-md mt-4 hover:bg-amber-800 transition-colors duration-300">Crear Cuenta</button>
@@ -134,20 +150,23 @@ function AuthForm() {
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700"
+                  className="w-full px-3 py-2 border border-amber-700 rounded-md box-border focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                 />
               </div>
               <div className="form-group">
                 <label className="block text-amber-600 text-sm mb-1">Contraseña</label>
                 <div className="relative">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="********"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700"
+                    className="w-full px-3 py-2 border border-amber-700 rounded-md box-border pr-10 focus:outline-none focus:ring-2 focus:ring-amber-700 placeholder-amber-800 text-amber-800"
                   />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                  <div 
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
+                  >
                     👁️
                   </div>
                 </div>

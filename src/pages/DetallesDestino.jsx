@@ -12,7 +12,6 @@ const allDestinations = [
     description: 'Explora la histórica Plaza de Armas con su arquitectura colonial.',
     rating: 4.5,
     reviews: 500,
-    price: 30,
     photos: ['/assets/plazaarmas1.jpg'], // Placeholder
     news: [],
     weather: {},
@@ -27,7 +26,6 @@ const allDestinations = [
     description: 'Disfruta de la auténtica música cubana en la Casa de la Música de Trinidad.',
     rating: 4.8,
     reviews: 750,
-    price: 25,
     photos: ['/assets/casamusica1.jpg'], // Placeholder
     news: [],
     weather: {},
@@ -42,7 +40,6 @@ const allDestinations = [
     description: 'Explora la imponente Fortaleza San Carlos en Matanzas.',
     rating: 4.6,
     reviews: 300,
-    price: 20,
     photos: ['/assets/fortalezasc1.jpg'], // Placeholder
     news: [],
     weather: {},
@@ -57,7 +54,6 @@ const allDestinations = [
     description: 'Visita un taller de cerámica tradicional en Camagüey.',
     rating: 4.4,
     reviews: 150,
-    price: 15,
     photos: ['/assets/ceramicataller1.jpg'], // Placeholder
     news: [],
     weather: {},
@@ -72,7 +68,6 @@ const allDestinations = [
     description: 'Conoce la historia en la Casa Natal de José Martí.',
     rating: 4.9,
     reviews: 1000,
-    price: 10,
     photos: ['/assets/casamarti1.jpg'], // Placeholder
     news: [],
     weather: {},
@@ -87,7 +82,6 @@ const allDestinations = [
     description: 'Explora el corazón histórico de Cuba con su arquitectura colonial y vibrante cultura.',
     rating: 4.8,
     reviews: 1250,
-    price: 45,
     category: 'Histórico',
     photos: [
       '/assets/lahabana1.jpg', // Placeholder paths
@@ -235,23 +229,27 @@ const DetallesDestino = () => {
   const currentDestinationComments = comments.filter(comment => comment.destinationId === id);
 
   return (
-    <div className="container mx-auto p-4 md:px-8 lg:px-16 bg-stone-100">
+    <div className="container mx-auto p-4 md:px-8 lg:px-16">
       {/* Main Content Area */}
       <div className="flex flex-col md:flex-row gap-8 mb-8">
         {/* Left Column - Destination Info, Gallery, and Comments */}
-        <div className="md:w-2/3 bg-stone-200 p-6 rounded-lg shadow-md">
+        <div className="md:w-2/3 bg-white p-6 rounded-lg shadow-md">
           {/* Destination Info */}
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-3xl font-bold text-amber-800 mb-1">{destination.name}</h2>
               <p className="text-amber-600 text-sm">📍 {destination.location}</p>
             </div>
-            <p className="text-3xl font-semibold text-amber-700">${destination.price} <span className="text-base text-amber-600">por persona</span></p>
+            <div className="flex flex-col items-end">
+              <span className="ml-4 bg-amber-700 text-white text-xs font-semibold px-2.5 py-0.5 rounded mb-1">{destination.category}</span>
+              {destination.rating > 4.0 && (
+                <span className="ml-4 bg-emerald-600 text-white text-xs font-semibold px-2.5 py-0.5 rounded">Recomendado</span>
+              )}
+            </div>
           </div>
           <div className="flex items-center mb-4">
             <span className="text-yellow-400 mr-1 text-xl">★ {destination.rating}</span>
             <span className="text-amber-600 text-sm">({destination.reviews} reseñas)</span>
-            <span className="ml-4 bg-amber-700 text-white text-xs font-semibold px-2.5 py-0.5 rounded">{destination.category}</span>
           </div>
           <p className="text-amber-600 mb-6">{destination.description}</p>
 
@@ -342,7 +340,7 @@ const DetallesDestino = () => {
         {/* Right Column - News, Weather, Useful Info */}
         <div className="md:w-1/3 flex flex-col space-y-8">
           {/* Current Weather Section */}
-          <div className="bg-stone-200 p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-bold text-amber-800 mb-4">☁️ Clima actual</h3>
             <div className="text-center mb-4">
               <p className="text-5xl font-bold text-amber-700">28°C</p>
@@ -356,7 +354,7 @@ const DetallesDestino = () => {
           </div>
 
           {/* Useful Information Section */}
-          <div className="bg-stone-200 p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-bold text-amber-800 mb-4">ℹ️ Información útil</h3>
             <div className="space-y-2 text-amber-600 text-sm">
               <p><span className="font-semibold">Mejor época:</span> Nov - Abr</p>
@@ -371,13 +369,16 @@ const DetallesDestino = () => {
 
       {/* Related Destinations Section */}
       {displayedRelatedDestinations.length > 0 && (
-        <div className="mt-8">
+        <div>
           <h2 className="text-2xl font-bold text-amber-800 mb-6">Destinos relacionados</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayedRelatedDestinations.map(destination => (
-              <div key={destination.id} className="bg-stone-200 rounded-lg shadow-md overflow-hidden flex flex-col">
+              <div key={destination.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
                 <div className="h-40 bg-gray-300 flex justify-center items-center relative">
-                     <span className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-700 text-white">{destination.category}</span>
+                  <span className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-700 text-white">{destination.category}</span>
+                  {destination.rating > 4.0 && (
+                    <span className="absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-600 text-white">Recomendado</span>
+                  )}
                 </div>
                 <div className="p-4 flex flex-col flex-grow">
                   <h3 className="text-lg font-semibold text-amber-800">{destination.name}</h3>
@@ -385,7 +386,6 @@ const DetallesDestino = () => {
                   <p className="text-amber-600 text-sm flex-grow mb-2">{destination.description}</p>
                   <div className="flex justify-between items-center mt-auto">
                     <span className="text-yellow-400 text-sm">★ {destination.rating}</span>
-                    <span className="text-lg font-bold text-amber-700">${destination.price}</span>
                   </div>
                   <Link to={`/destinos/${destination.id}`} className="bg-amber-700 text-white mt-4 text-center text-sm py-2 rounded-md hover:bg-amber-800 transition-colors">
                     Ver detalles
@@ -400,4 +400,4 @@ const DetallesDestino = () => {
   );
 };
 
-export default DetallesDestino; 
+export default DetallesDestino;

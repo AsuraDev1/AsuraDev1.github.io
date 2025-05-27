@@ -25,7 +25,7 @@ function ImageCarousel({ images }) {
       setCurrentIndex((currentIndex) => 
         currentIndex === images.length - 1 ? 0 : currentIndex + 1
       );
-    }, 10000); // 10 segundos
+    }, 3000); // 10 segundos
 
     return () => clearInterval(timer);
   }, [images.length]);

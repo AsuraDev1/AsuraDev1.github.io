@@ -11,6 +11,11 @@ function DestinoCard({ destino }) {
       <span className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-700 text-white">
         {destino.category}
       </span>
+      {destino.rating > 4.0 && (
+        <span className="absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-600 text-white">
+          Recomendado
+        </span>
+      )}
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-semibold text-amber-800 mb-2">
           {destino.name}

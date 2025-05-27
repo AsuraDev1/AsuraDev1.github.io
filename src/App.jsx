@@ -71,13 +71,13 @@ function App() {
   ];
 
   return (
-    <div className="font-playfair">
+    <div className="font-playfair pt-28">
       <Header />
 
       <Routes>
         <Route path="/" element={
           <>
-            <main className="relative w-4/5 mx-auto h-auto min-h-[500px] flex items-center mt-8">
+            <main className="relative w-4/5 mx-auto h-auto min-h-[500px] flex items-center">
               <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <img
                   src="https://i0.wp.com/passporterapp.com/es/blog/wp-content/uploads/2021/02/que-ver-en-cuba.jpg?resize=1536%2C1108&ssl=1"
@@ -88,11 +88,10 @@ function App() {
               </div>
               <div className="relative w-full flex flex-col md:flex-row items-center p-6">
                 <div className="md:w-1/2 text-left pr-12">
-                  <h1 className="text-6xl font-bold text-white leading-tight mb-6">Cubatravel: Cuba te espera con su rica historia y su encanto único</h1>
+                  <h1 className="text-6xl font-bold text-white leading-tight mb-6">RumbaCuba: Cuba te espera con su rica historia y su encanto único</h1>
                   <p className="text-lg text-white/90 mb-10">Descubre las maravillas de Cuba, desde sus playas de arena blanca hasta sus ciudades coloniales llenas de música y cultura.</p>
                   <div className="flex space-x-6">
                     <a href="#destinos-populares" onClick={scrollToDestinos} className="bg-amber-700 text-white px-6 py-2 rounded-md hover:bg-amber-800 transition-colors">Explorar Destinos</a>
-                    <button className="bg-amber-700 text-white px-6 py-2 rounded-md hover:bg-amber-800 transition-colors">Reservar Ahora</button>
                   </div>
                 </div>
               </div>
