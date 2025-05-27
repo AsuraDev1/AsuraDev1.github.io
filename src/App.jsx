@@ -77,7 +77,7 @@ function App() {
       <Routes>
         <Route path="/" element={
           <>
-            <main className="relative w-4/5 mx-auto h-auto min-h-[500px] flex items-center">
+            <main className="relative w-[95%] xs:w-4/5 mx-auto h-auto min-h-[300px] xs:min-h-[400px] sm:min-h-[500px] flex items-center">
               <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <img
                   src="https://i0.wp.com/passporterapp.com/es/blog/wp-content/uploads/2021/02/que-ver-en-cuba.jpg?resize=1536%2C1108&ssl=1"
@@ -86,23 +86,23 @@ function App() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-800/95 via-amber-800/40 to-transparent rounded-lg"></div>
               </div>
-              <div className="relative w-full flex flex-col md:flex-row items-center p-6">
-                <div className="md:w-1/2 text-left pr-12">
-                  <h1 className="text-6xl font-bold text-white leading-tight mb-6">RumbaCuba: Cuba te espera con su rica historia y su encanto único</h1>
-                  <p className="text-lg text-white/90 mb-10">Descubre las maravillas de Cuba, desde sus playas de arena blanca hasta sus ciudades coloniales llenas de música y cultura.</p>
-                  <div className="flex space-x-6">
-                    <a href="#destinos-populares" onClick={scrollToDestinos} className="bg-amber-700 text-white px-6 py-2 rounded-md hover:bg-amber-800 transition-colors">Explorar Destinos</a>
+              <div className="relative w-full flex flex-col md:flex-row items-center p-4 xs:p-6">
+                <div className="md:w-1/2 text-left pr-0 md:pr-12">
+                  <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-4 xs:mb-6">RumbaCuba: Cuba te espera con su rica historia y su encanto único</h1>
+                  <p className="text-base xs:text-lg text-white/90 mb-6 xs:mb-10">Descubre las maravillas de Cuba, desde sus playas de arena blanca hasta sus ciudades coloniales llenas de música y cultura.</p>
+                  <div className="flex space-x-4 xs:space-x-6">
+                    <a href="#destinos-populares" onClick={scrollToDestinos} className="bg-amber-700 text-white px-4 xs:px-6 py-2 rounded-md hover:bg-amber-800 transition-colors text-sm xs:text-base">Explorar Destinos</a>
                   </div>
                 </div>
               </div>
             </main>
 
-            <div className="w-4/5 mx-auto mt-8 mb-16">
-              <h2 className="text-3xl font-bold text-amber-800 text-center mb-8">Descubre Cuba</h2>
+            <div className="w-[95%] xs:w-4/5 mx-auto mt-4 xs:mt-8 mb-8 xs:mb-16">
+              <h2 className="text-2xl xs:text-3xl font-bold text-amber-800 text-center mb-4 xs:mb-8">Descubre Cuba</h2>
               <ImageCarousel images={carouselImages} />
             </div>
 
-            <div className="w-4/5 mx-auto flex flex-col md:flex-row mt-4 p-4 gap-8 mb-16">
+            <div className="w-[95%] xs:w-4/5 mx-auto flex flex-col md:flex-row mt-4 p-4 gap-4 xs:gap-8 mb-8 xs:mb-16">
               <div className="md:w-1/2">
                 <OfertasSection />
               </div>

@@ -28,15 +28,15 @@ function Header() {
   }, [isModalOpen]); // Dependencia en isModalOpen
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-amber-800 text-white p-4 border-b border-amber-700 shadow-lg z-50">
-      <div className="w-4/5 mx-auto flex justify-between items-center">
-        <div className="text-2xl font-bold tracking-wider hover:text-stone-200 transition-all duration-300 cursor-pointer">
+    <header className="fixed top-0 left-0 right-0 bg-amber-800 text-white p-2 xs:p-4 border-b border-amber-700 shadow-lg z-50">
+      <div className="w-[95%] xs:w-4/5 mx-auto flex justify-between items-center">
+        <div className="text-lg xs:text-xl sm:text-2xl font-bold tracking-wider hover:text-stone-200 transition-all duration-300 cursor-pointer">
           RumbaCuba
         </div>
 
         {/* Botón de menú para móvil */}
         <button 
-          className="md:hidden text-white p-2"
+          className="md:hidden text-white p-1 xs:p-2"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -45,41 +45,41 @@ function Header() {
 
         {/* Navegación para desktop */}
         <nav className="hidden md:block">
-          <ul className="flex items-center space-x-8">
+          <ul className="flex items-center space-x-4 lg:space-x-8">
             <li>
-              <Link to="/" className="text-white hover:text-stone-200 transition-all duration-300 relative group">
+              <Link to="/" className="text-white hover:text-stone-200 transition-all duration-300 relative group text-sm lg:text-base">
                 Inicio
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-stone-200 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </li>
             <li className="flex items-center group">
-              <a href="#" className="text-white hover:text-stone-200 transition-all duration-300 relative">
+              <a href="#" className="text-white hover:text-stone-200 transition-all duration-300 relative text-sm lg:text-base">
                 Idioma
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-stone-200 transition-all duration-300 group-hover:w-full"></span>
               </a>
               <span className="ml-1 text-xs transform group-hover:rotate-180 transition-transform duration-300">▼</span>
             </li>
             <li>
-              <Link to="/destinos" className="text-white hover:text-stone-200 transition-all duration-300 relative group">
+              <Link to="/destinos" className="text-white hover:text-stone-200 transition-all duration-300 relative group text-sm lg:text-base">
                 Destinos
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-stone-200 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-stone-200 transition-all duration-300 relative group">
+              <a href="#" className="text-white hover:text-stone-200 transition-all duration-300 relative group text-sm lg:text-base">
                 Blog
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-stone-200 transition-all duration-300 group-hover:w-full"></span>
               </a>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-stone-200 transition-all duration-300 relative group">
+              <a href="#" className="text-white hover:text-stone-200 transition-all duration-300 relative group text-sm lg:text-base">
                 Itinerarios
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-stone-200 transition-all duration-300 group-hover:w-full"></span>
               </a>
             </li>
             <li>
               <button 
-                className="bg-white text-amber-800 px-4 py-2 rounded-md font-medium hover:bg-stone-200 transition-all duration-300"
+                className="bg-white text-amber-800 px-2 xs:px-4 py-1 xs:py-2 rounded-md font-medium hover:bg-stone-200 transition-all duration-300 text-sm lg:text-base"
                 onClick={toggleModal}
               >
                 Sign Up
@@ -93,37 +93,34 @@ function Header() {
           <nav className="absolute top-full left-0 right-0 bg-amber-800 border-b border-amber-700 md:hidden">
             <ul className="flex flex-col p-4 space-y-4">
               <li>
-                <Link to="/" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                <Link to="/" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
                   Inicio
                 </Link>
               </li>
               <li>
-                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
                   Idioma
                 </a>
               </li>
               <li>
-                <Link to="/destinos" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                <Link to="/destinos" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
                   Destinos
                 </Link>
               </li>
               <li>
-                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300" onClick={toggleMenu}>
+                <a href="#" className="block text-white hover:text-stone-200 transition-all duration-300 text-base py-2">
                   Itinerarios
                 </a>
               </li>
               <li>
                 <button 
-                  className="w-full bg-white text-amber-800 px-4 py-2 rounded-md font-medium hover:bg-stone-200 transition-all duration-300"
-                  onClick={() => {
-                    toggleModal();
-                    toggleMenu();
-                  }}
+                  className="w-full bg-white text-amber-800 px-4 py-2 rounded-md font-medium hover:bg-stone-200 transition-all duration-300 text-base"
+                  onClick={toggleModal}
                 >
                   Sign Up
                 </button>
