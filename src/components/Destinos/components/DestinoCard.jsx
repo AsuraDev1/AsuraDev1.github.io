@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import './DestinoCard.css';
+
 
 function DestinoCard({ destino, onAddDestination }) {
   return (
     <div className="bg-stone-200 rounded-lg shadow-md overflow-hidden flex flex-col relative">
       <div className="h-48 bg-stone-100 flex justify-center items-center">
-        {/* Aquí irá la imagen del destino */}
+       
       </div>
       <span className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-700 text-white">
         {destino.category}

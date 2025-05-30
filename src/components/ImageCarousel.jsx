@@ -19,13 +19,13 @@ function ImageCarousel({ images }) {
       .catch(err => console.error("Error al cargar las imágenes", err));
   }, [images]);
 
-  // Efecto para el cambio automático de imágenes
+
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((currentIndex) => 
+      setCurrentIndex((currentIndex) =>
         currentIndex === images.length - 1 ? 0 : currentIndex + 1
       );
-    }, 3000); // 10 segundos
+    }, 3000);
 
     return () => clearInterval(timer);
   }, [images.length]);
@@ -41,11 +41,10 @@ function ImageCarousel({ images }) {
           images.map((image, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-all duration-500 ease-in-out transform ${
-                index === currentIndex 
-                  ? 'opacity-100 translate-x-0' 
+              className={`absolute inset-0 transition-all duration-500 ease-in-out transform ${index === currentIndex
+                  ? 'opacity-100 translate-x-0'
                   : 'opacity-0 translate-x-full'
-              }`}
+                }`}
             >
               <img
                 src={image.url}
@@ -61,17 +60,16 @@ function ImageCarousel({ images }) {
         )}
       </div>
 
-      {/* Indicadores */}
+
       <div className="absolute bottom-1 xs:bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex space-x-1 xs:space-x-2 sm:space-x-4">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8 rounded-full transition-all duration-300 flex items-center justify-center text-[10px] xs:text-xs sm:text-sm font-medium ${
-              index === currentIndex 
-                ? 'bg-white text-amber-800 scale-110' 
+            className={`w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8 rounded-full transition-all duration-300 flex items-center justify-center text-[10px] xs:text-xs sm:text-sm font-medium ${index === currentIndex
+                ? 'bg-white text-amber-800 scale-110'
                 : 'bg-amber-700 text-white hover:bg-amber-800'
-            }`}
+              }`}
             aria-label={`Ir a imagen ${index + 1}`}
           >
             {index + 1}

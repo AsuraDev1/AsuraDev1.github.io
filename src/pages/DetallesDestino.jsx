@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-// Header and Footer imports removed as they are handled in App.jsx
 
-// Combined and enriched data for all destinations, based on Destinos.jsx structure
 const allDestinations = [
   {
     id: '1',
@@ -12,11 +10,11 @@ const allDestinations = [
     description: 'Explora la histórica Plaza de Armas con su arquitectura colonial.',
     rating: 4.5,
     reviews: 500,
-    photos: ['/assets/plazaarmas1.jpg'], // Placeholder
+    photos: ['/assets/plazaarmas1.jpg'],
     news: [],
     weather: {},
     usefulInfo: {},
-    relatedDestinationIds: ['5'], // Related to Casa Natal José Martí
+    relatedDestinationIds: ['5'],
   },
   {
     id: '2',
@@ -26,7 +24,7 @@ const allDestinations = [
     description: 'Disfruta de la auténtica música cubana en la Casa de la Música de Trinidad.',
     rating: 4.8,
     reviews: 750,
-    photos: ['/assets/casamusica1.jpg'], // Placeholder
+    photos: ['/assets/casamusica1.jpg'],
     news: [],
     weather: {},
     usefulInfo: {},
@@ -40,7 +38,7 @@ const allDestinations = [
     description: 'Explora la imponente Fortaleza San Carlos en Matanzas.',
     rating: 4.6,
     reviews: 300,
-    photos: ['/assets/fortalezasc1.jpg'], // Placeholder
+    photos: ['/assets/fortalezasc1.jpg'],
     news: [],
     weather: {},
     usefulInfo: {},
@@ -54,7 +52,7 @@ const allDestinations = [
     description: 'Visita un taller de cerámica tradicional en Camagüey.',
     rating: 4.4,
     reviews: 150,
-    photos: ['/assets/ceramicataller1.jpg'], // Placeholder
+    photos: ['/assets/ceramicataller1.jpg'],
     news: [],
     weather: {},
     usefulInfo: {},
@@ -68,15 +66,15 @@ const allDestinations = [
     description: 'Conoce la historia en la Casa Natal de José Martí.',
     rating: 4.9,
     reviews: 1000,
-    photos: ['/assets/casamarti1.jpg'], // Placeholder
+    photos: ['/assets/casamarti1.jpg'],
     news: [],
     weather: {},
     usefulInfo: {},
     relatedDestinationIds: ['1', '4'],
   },
-  // Add La Habana Vieja back with its original details
+
   {
-    id: 'LaHabanaVieja', // Using a more descriptive ID for clarity
+    id: 'LaHabanaVieja',
     name: 'La Habana Vieja',
     location: 'La Habana',
     description: 'Explora el corazón histórico de Cuba con su arquitectura colonial y vibrante cultura.',
@@ -84,29 +82,29 @@ const allDestinations = [
     reviews: 1250,
     category: 'Histórico',
     photos: [
-      '/assets/lahabana1.jpg', // Placeholder paths
+      '/assets/lahabana1.jpg',
       '/assets/lahabana2.jpg',
       '/assets/lahabana3.jpg',
     ],
-    news: [], // Add actual news data later
+    news: [],
     weather: {},
     usefulInfo: {},
     relatedDestinationIds: ['2', '3', '4', '5'],
   },
 ];
 
-// Function to shuffle an array (Fisher-Yates (aka Knuth) Shuffle)
+
 const shuffleArray = (array) => {
   let currentIndex = array.length,
     randomIndex;
 
-  // While there remain elements to shuffle.
+
   while (currentIndex !== 0) {
-    // Pick a remaining element.
+
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
 
-    // And swap it with the current element.
+
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex],
       array[currentIndex],
@@ -116,10 +114,10 @@ const shuffleArray = (array) => {
 };
 
 const DetallesDestino = () => {
-  const { id } = useParams(); // Get ID from URL
+  const { id } = useParams();
   const [newCommentText, setNewCommentText] = useState('');
   const [comments, setComments] = useState([
-    // Initial comments - maybe filter by destination id later
+
     {
       id: 1,
       destinationId: '1',
@@ -127,79 +125,77 @@ const DetallesDestino = () => {
       rating: 5,
       date: 'Hace 2 días',
       text: 'Increíble experiencia! La arquitectura colonial es simplemente espectacular. Recomiendo la visita guiada.',
-      avatar: 'bg-gray-300' // Placeholder
+      avatar: 'bg-gray-300'
     },
     {
       id: 2,
-      destinationId: 'LaHabanaVieja', // Associate with La Habana Vieja
-      user: 'Pedro Pérez', // Placeholder
+      destinationId: 'LaHabanaVieja',
+      user: 'Pedro Pérez',
       rating: 4,
       date: 'Hace 1 día',
       text: 'Muy bonito lugar, mucha historia.',
-      avatar: 'bg-gray-300' // Placeholder
+      avatar: 'bg-gray-300'
     },
-    // Add more initial comments here if needed, associated with destinationIds
+
   ]);
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0); // State for gallery photo index
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [displayedRelatedDestinations, setDisplayedRelatedDestinations] = useState([]);
 
   const commentsListRef = useRef(null);
-  const commentInputRef = useRef(null); // Add ref for the textarea
+  const commentInputRef = useRef(null);
 
-  // Find the current destination based on ID
+
   const destination = allDestinations.find(dest => dest.id === id);
 
-  // Scroll to top when destination ID changes and reset photo index
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    setCurrentPhotoIndex(0); // Reset photo index on new destination
+    setCurrentPhotoIndex(0);
   }, [id]);
 
-  // Update related destinations when the current destination changes
+
   useEffect(() => {
     if (destination && destination.relatedDestinationIds) {
-      // Get full destination objects for related IDs, excluding the current destination
+
       const potentialRelated = allDestinations.filter(dest =>
         destination.relatedDestinationIds.includes(dest.id) && dest.id !== id
       );
-      // Shuffle and select up to 3
-      const shuffledRelated = shuffleArray([...potentialRelated]); // Shuffle a copy
+
+      const shuffledRelated = shuffleArray([...potentialRelated]);
       setDisplayedRelatedDestinations(shuffledRelated.slice(0, 3));
     } else {
       setDisplayedRelatedDestinations([]);
     }
-  }, [id, destination]); // Re-run when id or destination changes
+  }, [id, destination]);
 
-  // Handle cases where destination is not found (optional)
+
   useEffect(() => {
     if (!destination) {
       console.error(`Destination with ID ${id} not found.`);
-      // Example redirect (requires history object or similar from router v5, or navigate in v6)
-      // navigate('/404');
+
     }
   }, [id, destination]);
 
   const handlePublishComment = () => {
     if (newCommentText.trim() !== '') {
       const newComment = {
-        id: comments.length + 1, // Simple ID generation
-        destinationId: id, // Associate comment with current destination
-        user: 'Usuario Anónimo', // Placeholder user
-        rating: 5, // Placeholder rating
-        date: 'Justo ahora', // Placeholder date
+        id: comments.length + 1,
+        destinationId: id,
+        user: 'Usuario Anónimo',
+        rating: 5,
+        date: 'Justo ahora',
         text: newCommentText,
-        avatar: 'bg-gray-300' // Placeholder
+        avatar: 'bg-gray-300'
       };
       setComments([...comments, newComment]);
-      setNewCommentText(''); // Clear input field
+      setNewCommentText('');
 
-      // Remove focus from textarea
+
       if (commentInputRef.current) {
         commentInputRef.current.blur();
       }
 
-      // Scroll to the bottom after adding the new comment
-      // Use setTimeout to ensure DOM update has potentially happened
+
       setTimeout(() => {
         if (commentsListRef.current) {
           commentsListRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -215,26 +211,25 @@ const DetallesDestino = () => {
   };
 
   const goToNextPhoto = () => {
-     setCurrentPhotoIndex((prevIndex) =>
+    setCurrentPhotoIndex((prevIndex) =>
       (destination.photos && prevIndex === destination.photos.length - 1) ? 0 : prevIndex + 1
     );
   };
 
-  // Render loading or error state if destination not found
   if (!destination) {
     return <div className="container mx-auto p-4">Cargando o destino no encontrado...</div>;
   }
 
-  // Filter comments for the current destination
+
   const currentDestinationComments = comments.filter(comment => comment.destinationId === id);
 
   return (
     <div className="container mx-auto p-4 md:px-8 lg:px-16">
-      {/* Main Content Area */}
+
       <div className="flex flex-col md:flex-row gap-8 mb-8">
-        {/* Left Column - Destination Info, Gallery, and Comments */}
+
         <div className="md:w-2/3 bg-white p-6 rounded-lg shadow-md">
-          {/* Destination Info */}
+
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-3xl font-bold text-amber-800 mb-1">{destination.name}</h2>
@@ -253,10 +248,10 @@ const DetallesDestino = () => {
           </div>
           <p className="text-amber-600 mb-6">{destination.description}</p>
 
-          {/* Photo Gallery */}
+
           <h3 className="text-xl font-bold text-amber-800 mb-4">Galería de fotos</h3>
           <div className="relative rounded-lg overflow-hidden mb-8" style={{ height: '400px' }}> {/* Added fixed height for gallery */}
-            {/* Display current photo */}
+
             {destination.photos && destination.photos.length > 0 ? (
               <img
                 src={destination.photos[currentPhotoIndex]}
@@ -266,8 +261,8 @@ const DetallesDestino = () => {
             ) : (
               <div className="bg-gray-300 w-full h-full flex items-center justify-center text-gray-600 text-lg">Imagen no disponible</div>
             )}
-            
-            {/* Navigation buttons */}
+
+
             {destination.photos && destination.photos.length > 1 && (
               <>
                 <button className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md focus:outline-none" onClick={goToPreviousPhoto}>&lt;</button>
@@ -276,11 +271,11 @@ const DetallesDestino = () => {
             )}
           </div>
 
-          {/* Featured Comments Section */}
+
           <div className="mt-8">
             <h2 className="text-2xl font-bold text-amber-800 mb-6">Comentarios destacados</h2>
 
-            {/* Share Your Experience Form */}
+
             <div className="border-b border-gray-200 pb-6 mb-6">
               <h3 className="text-lg font-semibold text-amber-700 mb-4">Comparte tu experiencia</h3>
               <div className="mb-4">
@@ -315,7 +310,7 @@ const DetallesDestino = () => {
               </div>
             </div>
 
-            {/* Existing Comments List */}
+
             <div ref={commentsListRef} className="space-y-6">
               {currentDestinationComments.map(comment => (
                 <div key={comment.id} className="flex">
@@ -330,16 +325,16 @@ const DetallesDestino = () => {
                   </div>
                 </div>
               ))}
-               {currentDestinationComments.length === 0 && (
+              {currentDestinationComments.length === 0 && (
                 <p className="text-center text-amber-600">Sé el primero en comentar!</p>
               )}
             </div>
           </div>
         </div>
 
-        {/* Right Column - News, Weather, Useful Info */}
+
         <div className="md:w-1/3 flex flex-col space-y-8">
-          {/* Current Weather Section */}
+
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-bold text-amber-800 mb-4">☁️ Clima actual</h3>
             <div className="text-center mb-4">
@@ -353,7 +348,7 @@ const DetallesDestino = () => {
             <p className="text-center text-sm text-amber-600 mt-2">Humedad: 75% | Viento: 15 km/h</p>
           </div>
 
-          {/* Useful Information Section */}
+
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-bold text-amber-800 mb-4">ℹ️ Información útil</h3>
             <div className="space-y-2 text-amber-600 text-sm">
@@ -367,7 +362,7 @@ const DetallesDestino = () => {
         </div>
       </div>
 
-      {/* Related Destinations Section */}
+
       {displayedRelatedDestinations.length > 0 && (
         <div>
           <h2 className="text-2xl font-bold text-amber-800 mb-6">Destinos relacionados</h2>

@@ -8,7 +8,7 @@ function FechasImportantesSection() {
         <p className="text-sm text-amber-600 mb-4">Eventos y festivales que no te puedes perder</p>
 
         <div className="space-y-4">
-          {/* Evento 1 */}
+
           <div className="flex justify-between items-center border-b border-amber-700 pb-2">
             <div>
               <h3 className="font-semibold text-amber-800">Festival del Habanero</h3>
@@ -17,7 +17,7 @@ function FechasImportantesSection() {
             <span className="bg-white text-amber-700 text-xs px-2 py-1 rounded">Próximamente</span>
           </div>
 
-          {/* Evento 2 */}
+       
           <div className="flex justify-between items-center border-b border-amber-700 pb-2">
             <div>
               <h3 className="font-semibold text-amber-800">Carnaval de Santiago</h3>
@@ -26,7 +26,7 @@ function FechasImportantesSection() {
             <span className="bg-white text-amber-700 text-xs px-2 py-1 rounded">Destacado</span>
           </div>
 
-          {/* Evento 3 */}
+        
           <div className="flex justify-between items-center pb-2">
             <div>
               <h3 className="font-semibold text-amber-800">Festival Internacional de Jazz</h3>

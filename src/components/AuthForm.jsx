@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
-function AuthForm() {
+function AuthForm({ onClose }) {
+  const { login } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,11 +20,21 @@ function AuthForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (isLogin) {
-      console.log('Iniciar Sesión:', { email, password });
-      // Lógica de inicio de sesión aquí
+      
+      login({
+        email,
+        fullName: email.split('@')[0], 
+        avatar: `https://ui-avatars.com/api/?name=${email.split('@')[0]}&background=random`
+      });
+      onClose(); 
     } else {
-      console.log('Registrarse:', { fullName, email, password, confirmPassword, country, age });
-      // Lógica de registro aquí
+   
+      login({
+        email,
+        fullName,
+        avatar: `https://ui-avatars.com/api/?name=${fullName}&background=random`
+      });
+      onClose();
     }
   };
 
@@ -57,7 +69,7 @@ function AuthForm() {
 
       <form className="space-y-2 xs:space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
         <div className="relative">
-          {/* Formulario de Registro */}
+         
           <div className={`w-full transition-all duration-300 ease-out ${!isLogin ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none absolute'}`}>
             <div className="space-y-2 xs:space-y-3 sm:space-y-4">
               <div className="form-group">
@@ -140,7 +152,7 @@ function AuthForm() {
             </div>
           </div>
 
-          {/* Formulario de Inicio de Sesión */}
+          
           <div className={`w-full transition-all duration-300 ease-out ${isLogin ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none absolute'}`}>
             <div className="space-y-2 xs:space-y-3 sm:space-y-4">
               <div className="form-group">

@@ -2,14 +2,14 @@ import React from 'react';
 import FilterSection from './components/FilterSection';
 import DestinoCard from './components/DestinoCard';
 
-// Datos de ejemplo de destinos
+
 export const destinos = [
   { id: 1, category: 'Arquitectura Colonial', name: 'Plaza de Armas', location: 'La Habana', rating: 4.5 },
   { id: 2, category: 'Música Tradicional', name: 'Casa de la Música', location: 'Trinidad', rating: 4.8 },
   { id: 3, category: 'Arquitectura Militar', name: 'Fortaleza San Carlos', location: 'Matanzas', rating: 4.6 },
   { id: 4, category: 'Artesanías', name: 'Taller de Cerámica', location: 'Camagüey', rating: 4.4 },
   { id: 5, category: 'Historia', name: 'Casa Natal José Martí', location: 'La Habana', rating: 4.9 },
-  // Añadir más destinos aquí si es necesario
+
 ];
 
 function Destinos({ onAddDestination }) {

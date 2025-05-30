@@ -13,6 +13,11 @@ import Destinos from './components/Destinos/Destinos'
 import DetallesDestino from './pages/DetallesDestino'
 import Itinerario from './pages/Itinerario'
 import { destinos as allDestinos } from './components/Destinos/Destinos'
+import BlogPage from './pages/BlogPage'
+import UserProfile from './components/UserProfile'
+import ScrollToTop from './components/ScrollToTop'
+import ProtectedRoute from './components/ProtectedRoute'
+import { useAuth } from './context/AuthContext'
 
 function App() {
   const scrollToDestinos = (e) => {
@@ -77,7 +82,14 @@ function App() {
      { ...allDestinos[1], date: '07/06/2024', duration: 'Medio día', description: 'Paisaje único con mogotes y plantaciones de tabaco' },
   ]);
 
+  const { user, toggleModal } = useAuth();
+
   const handleAddDestination = (destino) => {
+    if (!user) {
+      toggleModal();
+      return;
+    }
+
     const nuevoDestinoItinerario = {
       ...destino,
       date: 'Seleccionar fecha',
@@ -99,6 +111,7 @@ function App() {
   return (
     <div className="font-playfair pt-20">
       <Header />
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={
@@ -145,15 +158,21 @@ function App() {
           </>
         } />
         <Route path="/destinos" element={<Destinos onAddDestination={handleAddDestination} />} />
-        <Route 
-          path="/itinerario" 
-          element={<Itinerario 
-                      itinerarioDestinos={itinerarioDestinos} 
-                      onRemoveDestination={handleRemoveDestination} 
-                      onAddDestination={handleAddDestination}
-                    />} 
-        />
         <Route path="/destinos/:id" element={<DetallesDestino />} />
+        <Route path="/blog" element={<BlogPage />} />
+
+        <Route element={<ProtectedRoute />}>
+           <Route path="/profile" element={<UserProfile />} />
+           <Route 
+             path="/itinerario" 
+             element={<Itinerario 
+                         itinerarioDestinos={itinerarioDestinos} 
+                         onRemoveDestination={handleRemoveDestination} 
+                         onAddDestination={handleAddDestination}
+                       />} 
+           />
+        </Route>
+
       </Routes>
 
       <Footer />
