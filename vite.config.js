@@ -7,8 +7,18 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: 'https://asuradev1.github.io/',
+  base: '/',
   test: {
     environment: "jsdom"
+  },
+  server: {
+    proxy: {
+      '/turismo/API': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+      }
+    }
   }
 })

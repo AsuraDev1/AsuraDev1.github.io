@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Header from './components/header'
 import OfertasSection from './components/OfertasSection'
@@ -12,14 +12,48 @@ import { Routes, Route } from 'react-router-dom'
 import Destinos from './components/Destinos/Destinos'
 import DetallesDestino from './pages/DetallesDestino'
 import Itinerario from './pages/Itinerario'
-import { destinos as allDestinos } from './components/Destinos/Destinos'
 import BlogPage from './pages/BlogPage'
 import UserProfile from './components/UserProfile'
 import ScrollToTop from './components/ScrollToTop'
 import ProtectedRoute from './components/ProtectedRoute'
 import { useAuth } from './context/AuthContext'
+import { destinationService } from './services/api'
 
 function App() {
+  const [itinerarioDestinos, setItinerarioDestinos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchInitialDestinos = async () => {
+      try {
+        const response = await destinationService.getAll();
+        const destinosData = response.data;
+        // Tomar los primeros tres destinos para el itinerario inicial
+        const destinosIniciales = destinosData.slice(0, 3).map(destino => ({
+          id: destino.destino_id,
+          name: destino.nombre,
+          location: destino.provincia,
+          rating: destino.calificacion || 0,
+          category: destino.categoria || 'Sin categoría',
+          description: destino.descripcion,
+          image: destino.imagen_principal,
+          date: destino.destino_id === destinosData[0].destino_id ? '06/06/2024' : 
+                destino.destino_id === destinosData[1].destino_id ? '07/06/2024' : '08/06/2024',
+          duration: destino.destino_id === destinosData[0].destino_id ? 'Día completo' : 
+                   destino.destino_id === destinosData[1].destino_id ? 'Medio día' : 'Día completo'
+        }));
+        setItinerarioDestinos(destinosIniciales);
+      } catch (err) {
+        setError(err.response?.data?.message || 'Error al cargar los destinos');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInitialDestinos();
+  }, []);
+
   const scrollToDestinos = (e) => {
     e.preventDefault();
     const destinosSection = document.getElementById('destinos-populares');
@@ -64,23 +98,12 @@ function App() {
       caption: "La música y el baile toman las calles durante las celebraciones cubanas."
     },
     {
-      url: "https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/468409840_10169512908985655_8546946108973700855_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cf85f3&_nc_ohc=N79iGEMWDY0Q7kNvwHHeaz_&_nc_oc=AdmjHC4-CbtWjSGw4w34NU9NnTxlXuy_Ux36LUX7U1YRRaTKM3JV-ikD96pUE6A3Hwg&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=GM6EuKEt-wc-p48AXocstw&oh=00_AfISpNkYfTZLTKIGKD_CGeCXf3nvI2Rnx7NmHnKIySAuuA&oe=68398003",
-      alt: "Un estanque en un jardín botánico con un pabellón",
-      title: "Casa de Polo Montañez",
-      caption: "Explora las viviendas de los artistas de más renombre en la isla."
-    },
-    {
       url: "https://onlinetours.es/blog/wp-content/uploads/sites/3/2018/01/pinar-del-rio_DSC5426.jpg",
       alt: "Mural colorido pintado en una formación rocosa natural",
       title: "Arte en la Naturaleza",
       caption: "Admira las impresionantes obras de arte integradas en el paisaje cubano."
     }
   ];
-
-  const [itinerarioDestinos, setItinerarioDestinos] = useState([
-     { ...allDestinos[0], date: '06/06/2024', duration: 'Día completo', description: 'Corazón histórico de Cuba con arquitectura colonial' },
-     { ...allDestinos[1], date: '07/06/2024', duration: 'Medio día', description: 'Paisaje único con mogotes y plantaciones de tabaco' },
-  ]);
 
   const { user, toggleModal } = useAuth();
 
@@ -95,6 +118,7 @@ function App() {
       date: 'Seleccionar fecha',
       duration: 'Seleccionar duración',
       description: destino.description || 'Descripción no disponible',
+      image: destino.image || destino.imagen_principal
     };
     if (!itinerarioDestinos.some(item => item.id === nuevoDestinoItinerario.id)) {
         console.log('Añadiendo destino al itinerario:', nuevoDestinoItinerario);
@@ -116,7 +140,7 @@ function App() {
       <Routes>
         <Route path="/" element={
           <>
-            <main className="relative w-[95%] xs:w-4/5 mx-auto h-auto min-h-[300px] xs:min-h-[400px] sm:min-h-[500px] flex items-center">
+            <main className="relative w-[80%] xs:w-4/5 mx-auto h-auto min-h-[300px] xs:min-h-[400px] sm:min-h-[500px] flex items-center">
               <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <img
                   src="https://i0.wp.com/passporterapp.com/es/blog/wp-content/uploads/2021/02/que-ver-en-cuba.jpg?resize=1536%2C1108&ssl=1"
@@ -141,14 +165,7 @@ function App() {
               <ImageCarousel images={carouselImages} />
             </div>
 
-            <div className="w-[95%] xs:w-4/5 mx-auto flex flex-col md:flex-row mt-4 p-4 gap-4 xs:gap-8 mb-8 xs:mb-16">
-              <div className="md:w-1/2">
-                <OfertasSection />
-              </div>
-              <div className="md:w-1/2">
-                <FechasImportantesSection />
-              </div>
-            </div>
+         
 
             <div id="destinos-populares">
               <PopularDestinationsSection />
@@ -158,7 +175,7 @@ function App() {
           </>
         } />
         <Route path="/destinos" element={<Destinos onAddDestination={handleAddDestination} />} />
-        <Route path="/destinos/:id" element={<DetallesDestino />} />
+        <Route path="/destinos/:id" element={<DetallesDestino onAddDestination={handleAddDestination} />} />
         <Route path="/blog" element={<BlogPage />} />
 
         <Route element={<ProtectedRoute />}>

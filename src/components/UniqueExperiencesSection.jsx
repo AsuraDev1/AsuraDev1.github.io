@@ -1,6 +1,11 @@
 import React from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function UniqueExperiencesSection() {
+  const { user, toggleModal } = useAuth();
+  const navigate = useNavigate();
+
   const experiences = [
     {
       title: 'Recorrido por La Habana Vieja',
@@ -24,6 +29,16 @@ function UniqueExperiencesSection() {
       imageAlt: 'Entrada al Centro Turístico Las Barrigonas'
     },
   ];
+
+  const handleReservation = (experienceTitle) => {
+    if (!user) {
+      toggleModal();
+      return;
+    }
+    
+    // Aquí iría la lógica para reservar la experiencia
+    alert(`¡Gracias por tu interés en "${experienceTitle}"! Pronto nos pondremos en contacto contigo.`);
+  };
 
   return (
     <section className="w-[95%] xs:w-11/12 sm:w-4/5 mx-auto my-4 xs:my-8 sm:my-16">
@@ -49,7 +64,13 @@ function UniqueExperiencesSection() {
             <div className="w-full md:w-1/2 p-4 xs:p-6 flex flex-col justify-center">
               <h3 className="text-base xs:text-lg sm:text-xl font-semibold text-amber-800 mb-2 xs:mb-3">{experience.title}</h3>
               <p className="text-sm xs:text-base text-amber-600 mb-4">{experience.description}</p>
-              <button className="bg-amber-700 text-white px-3 xs:px-4 sm:px-6 py-2 rounded-md hover:bg-amber-800 transition-colors text-sm xs:text-base">
+              <button 
+                onClick={() => handleReservation(experience.title)}
+                className={`bg-amber-700 text-white px-3 xs:px-4 sm:px-6 py-2 rounded-md transition-colors text-sm xs:text-base ${
+                  user ? 'hover:bg-amber-800' : 'opacity-80 cursor-not-allowed'
+                }`}
+                title={!user ? 'Inicia sesión para reservar' : ''}
+              >
                 {experience.buttonText}
               </button>
             </div>

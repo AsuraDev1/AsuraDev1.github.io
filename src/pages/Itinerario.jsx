@@ -1,17 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ItinerarioDestinoCard from '../components/ItinerarioDestinoCard';
-import { destinos as allDestinos } from '../components/Destinos/Destinos';
 import { useNavigate } from 'react-router-dom';
-
+import { destinationService } from '../services/api';
 
 function Itinerario({ itinerarioDestinos, onRemoveDestination, onAddDestination }) {
   const navigate = useNavigate();
+  const [destinosRecomendados, setDestinosRecomendados] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const fetchDestinos = async () => {
+      try {
+        const data = await destinationService.getAll();
+        // Filtrar los destinos que ya están en el itinerario y limitar a 3
+        const recomendados = data.filter(destino =>
+          !itinerarioDestinos.some(itinerarioDestino => itinerarioDestino.id === destino.id)
+        )
+        .slice(0, 3) // Limitar a los primeros 3 destinos
+        .map(destino => ({
+          id: destino.id,
+          name: destino.nombre,
+          location: destino.pais,
+          rating: (destino.likes / (destino.likes + destino.dislikes)) * 5 || 0,
+          category: destino.categoria || 'Sin categoría',
+          description: destino.descripcion,
+          image: destino.imagen
+        }));
+        setDestinosRecomendados(recomendados);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const destinosRecomendados = allDestinos.filter(destino =>
-    !itinerarioDestinos.some(itinerarioDestino => itinerarioDestino.id === destino.id)
-  );
-
+    fetchDestinos();
+  }, [itinerarioDestinos]);
 
   return (
     <div className="font-playfair pt-12 sm:pt-16 md:pt-20 bg-orange-100 min-h-screen">
